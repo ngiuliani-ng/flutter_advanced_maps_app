@@ -9,3 +9,5 @@ A new Flutter application. Fudeo exercises.
         - Argument: **Introduzione Google Maps**
     - Lesson 4.2: https://bit.ly/3f8D53X
         - Argument: **Panoramica Codice App**
+    - Lesson: 4.3: https://bit.ly/3lALXR3
+        - Argument: **Interfaccia Grafica**
