@@ -7,3 +7,5 @@ A new Flutter application. Fudeo exercises.
 - Lessons:
     - Lesson 4.1: https://bit.ly/3ra4rJ0
         - Argument: **Introduzione Google Maps**
+    - Lesson 4.2: https://bit.ly/3f8D53X
+        - Argument: **Panoramica Codice App**
