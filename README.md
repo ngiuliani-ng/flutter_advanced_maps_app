@@ -11,3 +11,5 @@ A new Flutter application. Fudeo exercises.
         - Argument: **Panoramica Codice App**
     - Lesson: 4.3: https://bit.ly/3lALXR3
         - Argument: **Interfaccia Grafica**
+    - Lesson: 4.3: https://bit.ly/2PjUVpu
+        - Argument: **Installazione Google Maps API Key**
