@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
             borderRadius: BorderRadius.circular(4),
           ),
         ),
-        transportMode(name: "UberX", time: "12:05", price: 15.50),
-        transportMode(name: "Pool", time: "12:15", price: 10.15),
+        transportMode(asset: "assets/images/UberX.jpg", name: "UberX", time: "12:05", price: 15.50),
+        transportMode(asset: "assets/images/UberPool.jpg", name: "Pool", time: "12:15", price: 10.15),
         Divider(
           thickness: 1,
         ),
@@ -68,11 +68,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget transportMode({@required String name, @required String time, @required double price}) {
+  Widget transportMode({
+    @required String asset,
+    @required String name,
+    @required String time,
+    @required double price,
+  }) {
     return ListTile(
-      leading: Icon(
-        Icons.car_rental,
-        size: 40,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: 16,
+      ),
+      leading: Image.asset(
+        asset,
+        height: 50,
       ),
       title: Text(
         name,
@@ -80,8 +88,13 @@ class _HomePageState extends State<HomePage> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      subtitle: Text(time),
-      trailing: Text("€${price.toStringAsFixed(2)}"),
+      subtitle: Text(
+        time,
+        style: TextStyle(
+          fontSize: 13,
+        ),
+      ),
+      trailing: Text("\$${price.toStringAsFixed(2)}"),
     );
   }
 
@@ -97,6 +110,9 @@ class _HomePageState extends State<HomePage> {
         minWidth: double.infinity,
         color: Colors.black,
         textColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
         child: Text(
           "BOOK RIDE",
           style: TextStyle(
