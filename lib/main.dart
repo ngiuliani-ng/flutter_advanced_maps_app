@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(App());
@@ -28,6 +31,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static final CameraPosition startPosition = CameraPosition(
+    target: LatLng(40.785091, -73.968285),
+    tilt: 0,
+    bearing: 0,
+    zoom: 15,
+  );
+
+  static final CameraPosition endPosition = CameraPosition(
+    target: LatLng(40.780091, -73.962185),
+    tilt: 0,
+    bearing: 0,
+    zoom: 15,
+  );
+
+  /// La classe [Completer] viene utilizzata per produrre oggetti [Future]
+  /// e per completarli successivamente con un valore o con un errore.
+  /// Questa classe ci permette di configurare in maniera dinamica gli oggetti [Future]
+  /// e di fare l'await di questi in un altro posto.
+
+  final Completer<GoogleMapController> googleMapController = Completer();
+  final Completer<String> googleMapStyle = Completer();
+
+  @override
+  void initState() {
+    super.initState();
+    rootBundle.loadString("assets/styles/googleMap.json").then((style) => googleMapStyle.complete(style));
+    setupMap();
+  }
+
+  void setupMap() async {
+    final map = await googleMapController.future;
+    final mapStyle = await googleMapStyle.future;
+
+    map.setMapStyle(mapStyle);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +78,7 @@ class _HomePageState extends State<HomePage> {
           topRight: Radius.circular(32),
         ),
         panel: panel(),
-        body: maps(),
+        body: map(),
       ),
     );
   }
@@ -123,9 +162,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget maps() {
-    return Container(
-      color: Colors.grey.shade400,
+  Widget map() {
+    return GoogleMap(
+      initialCameraPosition: startPosition,
+      zoomControlsEnabled: false,
+      onMapCreated: (GoogleMapController controller) {
+        this.googleMapController.complete(controller);
+      },
     );
   }
 }
