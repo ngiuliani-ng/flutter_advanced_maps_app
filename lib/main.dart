@@ -53,6 +53,9 @@ class _HomePageState extends State<HomePage> {
   final Completer<GoogleMapController> googleMapController = Completer();
   final Completer<String> googleMapStyle = Completer();
 
+  final Set<Marker> markers = {};
+  final Set<Polyline> polylines = {};
+
   @override
   void initState() {
     super.initState();
@@ -60,11 +63,59 @@ class _HomePageState extends State<HomePage> {
     setupMap();
   }
 
+  void setMarker({
+    @required CameraPosition position,
+    @required String info,
+  }) {
+    markers.add(
+      Marker(
+        markerId: MarkerId(
+          position.target.toString(),
+        ),
+        position: position.target,
+        infoWindow: InfoWindow(
+          title: info,
+        ),
+      ),
+    );
+  }
+
+  void setPolyline({
+    @required CameraPosition startPosition,
+    @required CameraPosition endPosition,
+  }) {
+    polylines.add(
+      Polyline(
+        polylineId: PolylineId(
+          startPosition.target.toString() + endPosition.target.toString(),
+        ),
+        points: [startPosition.target, endPosition.target],
+        color: Colors.black,
+        width: 4,
+      ),
+    );
+  }
+
   void setupMap() async {
     final map = await googleMapController.future;
     final mapStyle = await googleMapStyle.future;
 
     map.setMapStyle(mapStyle);
+
+    setState(() {
+      setMarker(
+        position: startPosition,
+        info: "Start Position",
+      );
+      setMarker(
+        position: endPosition,
+        info: "End Position",
+      );
+      setPolyline(
+        startPosition: startPosition,
+        endPosition: endPosition,
+      );
+    });
   }
 
   @override
@@ -166,6 +217,8 @@ class _HomePageState extends State<HomePage> {
     return GoogleMap(
       initialCameraPosition: startPosition,
       zoomControlsEnabled: false,
+      markers: markers,
+      polylines: polylines,
       onMapCreated: (GoogleMapController controller) {
         this.googleMapController.complete(controller);
       },

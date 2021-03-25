@@ -15,3 +15,5 @@ A new Flutter application. Fudeo exercises.
         - Argument: **Installazione Google Maps API Key**
     - Lesson: 4.5: https://bit.ly/3cdShdS
         - Argument: **Configurazione Google Maps**
+    - Lesson: 4.6: https://bit.ly/3vZWeuT
+        - Argument: **Markers & Polylines**
