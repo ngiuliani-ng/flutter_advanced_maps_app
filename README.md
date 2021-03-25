@@ -17,3 +17,5 @@ A new Flutter application. Fudeo exercises.
         - Argument: **Configurazione Google Maps**
     - Lesson: 4.6: https://bit.ly/3vZWeuT
         - Argument: **Markers & Polylines**
+            - Screenshot App: Screenshot\Screenshot_1616648226.png
+            - Screenshot App: Screenshot\Screenshot_1616648238.png
